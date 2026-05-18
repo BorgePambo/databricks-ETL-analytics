@@ -20,13 +20,13 @@ resources:
       tasks:
         - task_key: bronze
           notebook_task:
-            notebook_path: src/medallion/bronze.ipynb
-            
+            notebook_path: ../src/medallion/bronze.ipynb
+
         - task_key: silver
           depends_on:
             - task_key: bronze
           notebook_task:
-            notebook_path: src/medallion/silver.ipynb
+            notebook_path: ../src/medallion/silver.ipynb
             
 
       environments:
