@@ -20,7 +20,7 @@ resources:
       tasks:
         - task_key: bronze
           notebook_task:
-            notebook_path: ../src/medallion_analytics/bronze.ipynb
+            notebook_path: ../src/medallion/bronze.ipynb
 
       environments:
         - environment_key: default
