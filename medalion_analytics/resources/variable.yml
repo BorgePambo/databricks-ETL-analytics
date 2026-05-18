@@ -1,0 +1,6 @@
+variables:
+  catalog:
+    default: analytics_dev
+
+  schema:
+    default: bronze
