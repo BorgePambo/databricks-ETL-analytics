@@ -9,17 +9,18 @@ on:
   push:
     branches:
       - main
-    # Executa apenas se houver alterações nesta pasta
+
+    # Executa apenas se houver alterações no projeto
     paths:
       - 'medalion_analytics/**'
 
 jobs:
-
   deploy:
     name: Bundle Deploy
     runs-on: ubuntu-latest
 
     steps:
+      # Clona o repositório
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -27,17 +28,20 @@ jobs:
       - name: Setup Databricks CLI
         uses: databricks/setup-cli@main
 
-      # Deploy do bundle
-      - name: Deploy Bundle
+      # Validação do bundle
+      - name: Validate Bundle
+        working-directory: medalion_analytics
+        run: databricks bundle validate -t prod
 
-        # Pasta onde está o databricks.yml
-        working-directory: lakehouse_analytics
-
-        # Comando de deploy
-        run: databricks bundle deploy
-
-        # Variáveis de ambiente
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: prod
+
+      # Deploy do bundle
+      - name: Deploy Bundle
+        working-directory: medalion_analytics
+        run: databricks bundle deploy -t prod
+
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
