@@ -13,8 +13,8 @@ resources:
       parameters:
         - name: catalog
           default: ${var.catalog}
-        - name: schema
-          default: ${var.schema}
+       # - name: schema
+       #   default: ${var.schema}
 
 
       tasks:
@@ -27,6 +27,12 @@ resources:
             - task_key: bronze
           notebook_task:
             notebook_path: ../src/medallion/silver.ipynb
+
+        - task_key: gold
+          depends_on:
+            - task_key: silver
+          notebook_task:
+            notebook_path: ../src/medallion/gold.ipynb
             
 
       environments:
