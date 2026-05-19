@@ -37,7 +37,7 @@ targets:
       root_path: /Workspace/Users/borge.pambo71@gmail.com/.bundle/${bundle.name}/${bundle.target}
     variables:
       catalog: analytics_prod
-      schema: prod
+      schema: bronze
     permissions:
       - user_name: borge.pambo71@gmail.com
         level: CAN_MANAGE
